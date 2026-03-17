@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Playfair Display", serif;
+  
+  --color-gold-50: #fdfaf2;
+  --color-gold-100: #f9f1db;
+  --color-gold-200: #f1e0b3;
+  --color-gold-300: #e6c87f;
+  --color-gold-400: #d9a94d;
+  --color-gold-500: #c58d32;
+  --color-gold-600: #a97027;
+  --color-gold-700: #8a5722;
+  --color-gold-800: #714720;
+  --color-gold-900: #603c1e;
+  --color-gold-950: #37200e;
+}
+
+:root {
+  background-color: #050505;
+  color: white;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #050505;
+}
+
+.text-gold {
+  color: #D4AF37;
+}
+
+.bg-gold {
+  background-color: #D4AF37;
+}
+
+.border-gold {
+  border-color: #D4AF37;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+::selection {
+  background: #D4AF37;
+  color: black;
+}
