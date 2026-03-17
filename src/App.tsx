@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useRef } from 'react';
+import { useMemo, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'motion/react';
@@ -7,12 +7,15 @@ import SmoothScroll from './components/SmoothScroll';
 import GrainOverlay from './components/GrainOverlay';
 import ReelCard from './components/ReelCard';
 import ButterflyCanvas from './components/ButterflyCanvas';
+import WebsiteGateway from './components/WebsiteGateway';
+import ContactSection from './components/ContactSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LOGO_URL = "/favicon.png";
 
 export default function App() {
+  const [showGateway, setShowGateway] = useState(true);
   const baseReels = useMemo(() => [
     {
       title: "Storytelling",
@@ -47,6 +50,8 @@ export default function App() {
   const zoomSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (showGateway) return;
+
     const ctx = gsap.context(() => {
       // Hero Animations
       gsap.from(".hero-content > *", {
@@ -106,15 +111,20 @@ export default function App() {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [showGateway]);
 
   return (
-    <SmoothScroll>
-      <div className="relative min-h-screen bg-[#050505] text-white selection:bg-gold-500 selection:text-black font-sans overflow-x-hidden">
-        <GrainOverlay />
-        <ButterflyCanvas />
+    <>
+      {showGateway && (
+        <WebsiteGateway onComplete={() => setShowGateway(false)} />
+      )}
+      <div className={`transition-opacity duration-1000 ${showGateway ? 'opacity-0' : 'opacity-100'}`}>
+        <SmoothScroll>
+          <div className="relative min-h-screen bg-[#050505] text-white selection:bg-gold-500 selection:text-black font-sans overflow-x-hidden">
+            <GrainOverlay />
+            <ButterflyCanvas />
 
-        {/* Navigation */}
+            {/* Navigation */}
         <nav className="fixed top-0 left-0 z-50 flex w-full items-center justify-between px-6 py-4 md:px-12 md:py-8 bg-black/10 backdrop-blur-md border-b border-white/5">
           <div className="flex items-center gap-4">
             <img 
@@ -316,6 +326,9 @@ export default function App() {
           </div>
         </section>
 
+        {/* Contact Section */}
+        <ContactSection />
+
         {/* Footer */}
         <footer className="border-t border-white/5 bg-zinc-950/30 py-24 px-6 md:px-12 lg:px-24">
           <div className="flex flex-col justify-between gap-16 lg:flex-row">
@@ -383,6 +396,8 @@ export default function App() {
         </footer>
       </div>
     </SmoothScroll>
+    </div>
+    </>
   );
 }
 
